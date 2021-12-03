@@ -6,8 +6,13 @@ authors = ["Juan Lara <julara@unal.edu.co>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+pydantic = "^1.8.2"
+pymongo = {extras = ["srv"], version = "^4.0"}
 
 [tool.poetry.dev-dependencies]
+ipython = "^7.30.0"
+jupyter = "^1.0.0"
+jupytext = "^1.13.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
