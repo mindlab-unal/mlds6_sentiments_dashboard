@@ -5,6 +5,9 @@ from mlds6sentiment.models.model import generate_model_pipeline
 from sklearn.linear_model import LogisticRegression
 from argparse import ArgumentParser
 
+from pandas import DataFrame
+#def train_model(data: DataFrame, label: str )
+
 def main():
     parser = ArgumentParser()
     parser.add_argument("--label", type=str)

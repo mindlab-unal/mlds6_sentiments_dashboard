@@ -1,0 +1,6 @@
+{
+    "k" : 3,
+    "n_combinations": 50,
+    "metric": "f1_score",
+    "stratify": true
+}

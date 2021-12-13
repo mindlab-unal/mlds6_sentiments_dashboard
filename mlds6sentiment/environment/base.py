@@ -1,6 +1,7 @@
-import os
+import os, json
 from mlds6sentiment.datamodels.environment import DataLakePaths
 from mlds6sentiment.datamodels.database import MongoCredentials
+from mlds6sentiment.datamodels.experiment import RandomKFoldExp
 
 def get_data_paths() -> DataLakePaths:
     """
@@ -35,3 +36,23 @@ def get_mongo_credentials() -> MongoCredentials:
             mongo_database=os.environ["MONGO_DATABASE"]
             )
     return creds
+
+def get_experiment() -> RandomKFoldExp:
+    """
+    Function to collect the experimental setup.
+
+    Returns
+    -------
+    experiment : RandomKFoldExp
+        Object with the experimental setup.
+    """
+    path = os.path.join(
+            os.environ["EXPERIMENTS_PATH"],
+            "random_kfold.json"
+            )
+    with open(path) as f:
+        random_kfold = json.load(f)
+    experiment = RandomKFoldExp(
+            **random_kfold
+            )
+    return experiment
