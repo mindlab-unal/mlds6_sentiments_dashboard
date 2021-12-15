@@ -1,7 +1,7 @@
 import os, json
 from mlds6sentiment.datamodels.environment import DataLakePaths
 from mlds6sentiment.datamodels.database import MongoCredentials
-from mlds6sentiment.datamodels.experiment import RandomKFoldExp
+from mlds6sentiment.datamodels.experiment import RandomKFoldExp, Hyperparameters
 
 def get_data_paths() -> DataLakePaths:
     """
@@ -16,7 +16,8 @@ def get_data_paths() -> DataLakePaths:
             raw_data = os.environ["RAW_DATA_PATH"],
             preprocessed_data = os.environ["PREPROCESSED_DATA_PATH"],
             models = os.environ["MODELS_PATH"],
-            features = os.environ["FEATURES_PATH"]
+            features = os.environ["FEATURES_PATH"],
+            results = os.environ["RESULTS_PATH"]
             )
     return paths
 
@@ -37,9 +38,14 @@ def get_mongo_credentials() -> MongoCredentials:
             )
     return creds
 
-def get_experiment() -> RandomKFoldExp:
+def get_kfold_params() -> RandomKFoldExp:
     """
     Function to collect the experimental setup.
+
+    Parameters
+    ----------
+    type : str
+        Type of hyperparameter to load.
 
     Returns
     -------
@@ -56,3 +62,23 @@ def get_experiment() -> RandomKFoldExp:
             **random_kfold
             )
     return experiment
+
+def get_hyperparameters() -> Hyperparameters:
+    path = os.path.join(
+            os.environ["EXPERIMENTS_PATH"],
+            "hyperparameters.json"
+            )
+    """
+    Function to collect the hyperparameters.
+
+    Returns
+    -------
+    hyperparameters : Hyperparameters
+        Object with the hyperparameters.
+    """
+    with open(path) as f:
+        hyperparameters = json.load(f)
+    hyperparameters = Hyperparameters(
+            **hyperparameters
+            )
+    return hyperparameters

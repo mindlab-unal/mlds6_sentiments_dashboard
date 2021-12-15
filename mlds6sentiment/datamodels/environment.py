@@ -19,3 +19,4 @@ class DataLakePaths(BaseModel):
     preprocessed_data : str
     models : str
     features : str
+    results : str

@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-pipeline: data-acquisition upload-data preprocess test-pipe
+pipeline: data-acquisition upload-data preprocess train
 
 data-acquisition:
 	@echo "Collecting data."
@@ -29,8 +29,24 @@ test-confidence-pipe:
 
 test-pipe: test-evaluation-pipe test-confidence-pipe
 
+train-evaluation:
+	@echo "Traning evaluation model"
+	source env_vars.env &&\
+		python scripts/training/training.py --label evaluation
+
+train-confidence:
+	@echo "Traning evaluation model"
+	source env_vars.env &&\
+		python scripts/training/training.py --label confidence
+
+train: train-evaluation train-confidence
+
+test-dashboard:
+	@echo "Launching dashboard"
+	source env_vars.env &&\
+		python scripts/dashboard/main.py
+
 launch_jupyter:
 	@echo "Spawning jupyter server"
 	source env_vars.env && jupyter notebook
-
 

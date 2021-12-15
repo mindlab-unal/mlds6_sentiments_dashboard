@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 
 class RandomKFoldExp(BaseModel):
     """
@@ -15,10 +16,9 @@ class RandomKFoldExp(BaseModel):
     stratify : bool
         Specifies if the training must be stritified.
     """
-    k : int
-    n_combinations : int
-    metric : str
-    stratify : bool
+    cv : int
+    n_iter : int
+    scoring : str
 
 class Hyperparameters(BaseModel):
     """
@@ -33,6 +33,8 @@ class Hyperparameters(BaseModel):
     model : str
         Path for the model hyperparemeters.
     """
-    extractor: str
-    selector: str
-    model: str
+    extractor__text__use_idf: List[bool]
+    extractor__text__sublinear_tf: List[bool]
+    selector__k: List[int]
+    classifier__penalty: List[str]
+    classifier__C: List[float]

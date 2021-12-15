@@ -15,6 +15,8 @@ nltk = "^3.6.5"
 spacy = "^3.2.0"
 sklearn = "^0.0"
 pyarrow = "^6.0.1"
+plotly = "^5.4.0"
+dash = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.30.0"
