@@ -16,7 +16,6 @@ def get_data_paths() -> DataLakePaths:
             raw_data = os.environ["RAW_DATA_PATH"],
             preprocessed_data = os.environ["PREPROCESSED_DATA_PATH"],
             models = os.environ["MODELS_PATH"],
-            features = os.environ["FEATURES_PATH"],
             results = os.environ["RESULTS_PATH"]
             )
     return paths

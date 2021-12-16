@@ -17,7 +17,6 @@ def preprocess_text(document: str) -> str:
     cleaned_document : str
         Preprocessed text.
     """
-    nltk.download('stopwords')
     lower_document = document.lower()
     no_signs_document = re.sub(r"[^a-zéáíóúñ ]", "", lower_document)
     strip_document = no_signs_document.strip()
