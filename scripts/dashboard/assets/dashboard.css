@@ -1,0 +1,8 @@
+h1, h2 {
+    text-align: center;
+}
+
+.twocolumns {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}

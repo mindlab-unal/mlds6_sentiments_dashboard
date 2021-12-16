@@ -1,6 +1,6 @@
 import pandas as pd
 from pandas import DataFrame
-import re
+import re, nltk
 from nltk.corpus import stopwords
 
 def preprocess_text(document: str) -> str:
@@ -18,12 +18,10 @@ def preprocess_text(document: str) -> str:
         Preprocessed text.
     """
     lower_document = document.lower()
-    no_signs_document = re.sub(r"[^a-zA-Zéáíóúñ ]", "", lower_document)
+    no_signs_document = re.sub(r"[^a-zéáíóúñ ]", "", lower_document)
     strip_document = no_signs_document.strip()
     tokens = strip_document.split()
     sws = stopwords.words("spanish") 
-    white_list = ["nada", "tuvo", "tuve", "tendrá", "sentido"]
-    sws = list(filter(lambda word: word not in white_list, sws))
     filtered_tokens = filter(lambda token: token not in sws, tokens)
     cleaned_document = " ".join(filtered_tokens)
     return cleaned_document
@@ -56,7 +54,9 @@ def preprocess_pipe(reviews_df: DataFrame) -> DataFrame:
         .assign(
             timespan = lambda df: pd.to_datetime(df["timespan"], format="%Y-%m-%d"),
             text = lambda df: df["text"].apply(preprocess_text),
-            n_words = lambda df: df["text"].apply(lambda document: len(document.split()))
+            n_words = lambda df: df["text"].apply(lambda document: len(document.split())),
+            evaluation = lambda df: (df["evaluation"] > 0).astype("int"),
+            confidence = lambda df: (df["confidence"] > 2).astype("int")
         )
     )
     return clean_reviews_df

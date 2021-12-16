@@ -11,8 +11,11 @@ class DataLakePaths(BaseModel):
     preprocessed_data : str
         Folder to store preprocessed data.
     models : str
-        Folders to save the models.
+        Folder to save the models.
+    features : str
+        Folder to save the extracted features.
     """
     raw_data : str
     preprocessed_data : str
     models : str
+    results : str

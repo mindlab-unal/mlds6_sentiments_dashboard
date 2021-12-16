@@ -1,0 +1,7 @@
+{
+    "classifier__penalty": ["l2"],
+    "classifier__C": [0.1, 1, 10],
+    "extractor__text__use_idf": [true, false],
+    "extractor__text__sublinear_tf": [true, false],
+    "selector__k": [100, 200, 300, 400, 500]
+}
